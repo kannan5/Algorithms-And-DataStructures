@@ -90,7 +90,43 @@ class LinkedList:
             if slow == fast:
                 return True
         return False
+    def visualize_list(self):  
+        current = self.head
+        string_repr = ""
+        while current:
+            string_repr += f"{current.data}  --> "
+            current = current.next
+        # END represents end of the LinkedList
+        return string_repr + "END"
+    
+    
+    def insert_head(self, new_data):
+        current = self.head
+        new_node = Node(new_data)
+        new_node.next = current
+        self.head = new_node
+    
+    def insert_at_tail(self,new_data):
+        current = self.head
+        while current.next is not None:
+            current = current.next
+        current.next = Node(new_data)
 
+    def delete_head(self):
+        current = self.head
+        if current.next is not None:
+            current = current.next
+        self.head = current
+    
+    def delete_tail(self):  # delete the Last Node (aka) Tail
+        current = self.head
+        if current.next is None:
+            return
+        while current.next is not None:
+            if current.next.next is None:
+                current.next = None
+                return 
+            current = current.next
 
 class Node:
     def __init__(self, data_val):
