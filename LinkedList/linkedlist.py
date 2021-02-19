@@ -90,7 +90,8 @@ class LinkedList:
             if slow == fast:
                 return True
         return False
-    def visualize_list(self):  
+
+    def visualize_list(self):
         current = self.head
         string_repr = ""
         while current:
@@ -98,15 +99,14 @@ class LinkedList:
             current = current.next
         # END represents end of the LinkedList
         return string_repr + "END"
-    
-    
+
     def insert_head(self, new_data):
         current = self.head
         new_node = Node(new_data)
         new_node.next = current
         self.head = new_node
-    
-    def insert_at_tail(self,new_data):
+
+    def insert_at_tail(self, new_data):
         current = self.head
         while current.next is not None:
             current = current.next
@@ -117,7 +117,7 @@ class LinkedList:
         if current.next is not None:
             current = current.next
         self.head = current
-    
+
     def delete_tail(self):  # delete the Last Node (aka) Tail
         current = self.head
         if current.next is None:
@@ -125,8 +125,39 @@ class LinkedList:
         while current.next is not None:
             if current.next.next is None:
                 current.next = None
-                return 
+                return
             current = current.next
+
+    def find_mid(self):
+        if self.head is None:
+            return "No Element in The List"
+        slow = self.head
+        fast = self.head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow.data
+
+    def rotate_list(self, rotate_index):
+        current = self.head
+        current_index = 0
+        switch_node = None
+        prev_node = self.head
+
+        while current is not None:
+            if current_index + 1 == rotate_index:
+                switch_node = current.next
+                current.next = None
+            current = current.next
+            current_index += 1
+
+        if switch_node is not None:
+            current = switch_node
+            while current.next is not None:
+                current = current.next
+            current.next = prev_node
+            self.head = switch_node
+
 
 class Node:
     def __init__(self, data_val):
@@ -141,6 +172,6 @@ if __name__ == "__main__":
     list1.head.next.next = Node(3)
     list1.add_item(Node(4))
     list1.add_item(Node(5))
-    list1.reverse_recursive()
+    list1.rotate_list(3)
     list1.print_list()
     del list1

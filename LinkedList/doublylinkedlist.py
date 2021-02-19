@@ -27,7 +27,7 @@ class DoublyLinkedList:
             current = current.next
             current_index += 1
 
-    def printList(self):
+    def print_list(self):
         current = self.head
         while current is not None:
             print(str(current.data), end=" --> ")
@@ -62,10 +62,10 @@ class DoublyLinkedList:
 
 
 class node:
-    def __init__(self, dataval, prevdata=None, nextdata=None):
-        self.prev = prevdata
-        self.data = dataval
-        self.next = nextdata
+    def __init__(self, data_val, prev_data=None, next_data=None):
+        self.prev = prev_data
+        self.data = data_val
+        self.next = next_data
 
 
 if __name__ == "__main__":
@@ -77,4 +77,5 @@ if __name__ == "__main__":
     list1.head = newNode
     list1.append_item(5)
     list1.add_by_index(3, 2)
-    list1.printList()
+    list1.print_list()
+

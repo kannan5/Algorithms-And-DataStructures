@@ -149,6 +149,71 @@ class BST:
         else:
             print("The Traversal Type " + traversal_type + " Is Not Supported")
 
+    def findClosestNode(self, tree, target, traversal_type="ITER"):
+        if traversal_type == "RECR":
+            return self._findClosestNodeRec(tree, target, float("inf"))
+
+        elif traversal_type == "ITER":
+            return self._findClosestNodeIter(tree, target, float("inf"))
+
+        else:
+            return "Enter the Correct Traversal Method \"RECR\" For Recrusive and \" ITER \" For Iterative Approach"
+
+    def _findClosestNodeIter(self, tree, target, closest):
+        # This Follows Up with Recursive Approach Of Finding the Closest Node to The BST
+        current_node = tree
+        while current_node is not None:
+
+            if abs(target - closest) > abs(target - current_node.data):
+                closest = current_node.data
+
+            if current_node.data > target:
+                current_node = current_node.left
+
+            if current_node.data < target:
+                current_node = current_node.right
+
+            else:
+                break
+
+        return closest
+
+    def _findClosestNodeRec(self, tree, target, closest_node):
+        # This Follows Up with Recursive Approach Of Finding the Closest Node to The BST
+        if tree is None:
+            return closest_node
+
+        if abs(target - closest_node) > abs(target - tree.data):
+            closest_node = tree.data
+
+        if target > tree.data:
+            return self._findClosestNode(tree.right, target, closest_node)
+
+        if target < tree.data:
+            return self._findClosestNode(tree.left, target, closest_node)
+
+        else:
+            return closest_node
+
+    def SumBranches(self, tree, cur_sum, res_arr):
+
+        if tree.left is None and tree.right is None and tree.data is not None:
+            res_arr.append(cur_sum + tree.data)
+
+        if tree.left:
+            lastNode = tree.data
+            cur_sum += lastNode
+            self.SumBranches(tree.left, cur_sum, res_arr)
+            cur_sum -= lastNode
+
+        if tree.right:
+            lastNode = tree.data
+            cur_sum += lastNode
+            self.SumBranches(tree.right, cur_sum, res_arr)
+            cur_sum -= lastNode
+
+        return res_arr
+
 
 if __name__ == "__main__":
     a = BST(15)
@@ -158,7 +223,7 @@ if __name__ == "__main__":
     a.root.left.right = Node(12)
     a.root.right.left = Node(20)
     a.root.right.right = Node(35)
-    a.insert(a.root, 40)
-    a.insert(a.root, 8)
     print(a.find(a.root, 10))
     print(a.pre_order_traversal(a.root, ""))
+    print(a.findClosestNode(a.root, 24, "ITER"))
+    print(a.SumBranches(a.root, 0, []))

@@ -41,3 +41,15 @@ Recursion is approach of Solving / traversing  the Problem.
                         
                         
                         
+    Every Recursive call represent decision or choice at each step.
+        Try Out all path to meet certain criteria.
+            These are Called Exhaustive Search or Combinatorial Search.
+            
+           
+        Problems are divided into two broad categories
+            1. To Generate **Permutations**
+                - In Permutation ** Sequences are Important.**
+            2. To Generate **Combinations**
+                - In Combinations ** Sequences are Not Important. Can Randomly Chose some Elements.**
+                So called these are Combinatorial Search
+    
