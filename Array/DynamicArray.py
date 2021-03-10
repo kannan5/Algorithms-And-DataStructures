@@ -34,11 +34,14 @@ class DynamicArray:
         self.A = new_array
         self.capacity = new_size
 
+    def iterate(self):
+        for x in range(0, self.n):
+            print(self.A[x])
+
 
 if __name__ == "__main__":
     arr = DynamicArray()
-
-
-
-
-
+    arr.append(1)
+    arr.append(2)
+    arr.append(3)
+    arr.iterate()
